@@ -1,7 +1,7 @@
 import React from "react";
 import useDataFetch from "../src/hooks/useDataFetch";
 
-export default function HomePage() {
+export default function App() {
   const {
     cityData,
     aqiColor,

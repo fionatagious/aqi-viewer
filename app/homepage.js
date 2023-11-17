@@ -1,7 +1,13 @@
+"use client";
+
+// This is a Client Component. It receives data as props and
+// has access to state and effects just like Page components
+// in the `pages` directory.
 import React from "react";
 import useDataFetch from "../src/hooks/useDataFetch";
+import { cityChoices } from "../app/consts";
 
-export default function App() {
+export default function Homepage() {
   const {
     cityData,
     aqiColor,
@@ -11,13 +17,6 @@ export default function App() {
     handleClick,
     refetch,
   } = useDataFetch();
-
-  const cityChoices = [
-    { buttonLabel: "My Location", slug: "here" },
-    { buttonLabel: "New York City", slug: "new-york-city" },
-    { buttonLabel: "Shanghai", slug: "shanghai" },
-    { buttonLabel: "Bangkok", slug: "bangkok" },
-  ];
 
   if (isLoading) {
     return <div>Loading...</div>;

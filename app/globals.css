@@ -3,3 +3,8 @@
   width: 200px;
   border: 2px solid black;
 }
+
+#map {
+  height: 180px;
+  background-color: grey;
+}

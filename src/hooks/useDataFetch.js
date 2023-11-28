@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { aqiColorDict, aqiCategoryDict } from "../../app/consts";
 
 export default function useDataFetch() {
   const [cityData, setCityData] = useState(null);
@@ -20,8 +21,9 @@ export default function useDataFetch() {
       const response = await fetch(`${url}${citySlug}/?token=${token}`);
       const res = await response.json();
       setCityData(res.data);
-      setAqiColor(getAqiColor(res.data.aqi));
-      setAqiCategory(getAqiCategory(res.data.aqi));
+      const aqiKey = getAqiKey(res.data.aqi);
+      setAqiColor(aqiColorDict[aqiKey]);
+      setAqiCategory(aqiCategoryDict[aqiKey]);
       setIsLoading(false);
 
       // save new data to local storage
@@ -46,8 +48,9 @@ export default function useDataFetch() {
       // city was previously saved to local storage, so use localStorage
       const parsedData = JSON.parse(localStorage.getItem(citySlug));
       setCityData(parsedData);
-      setAqiColor(getAqiColor(parsedData.aqi));
-      setAqiCategory(getAqiCategory(parsedData.aqi));
+      const aqiKey = getAqiKey(parsedData.aqi);
+      setAqiColor(aqiColorDict[aqiKey]);
+      setAqiCategory(aqiCategoryDict[aqiKey]);
     } else {
       // city is not in local storage, so fetch data from API
       fetchData();
@@ -73,34 +76,18 @@ export default function useDataFetch() {
   };
 }
 
-function getAqiColor(aqi) {
+function getAqiKey(aqi) {
   if (aqi <= 50) {
-    return "bg-green-500";
+    return "good";
   } else if (aqi <= 100) {
-    return "bg-yellow-500";
+    return "moderate";
   } else if (aqi <= 150) {
-    return "bg-orange-500";
+    return "unhealthyForSensitiveGroups";
   } else if (aqi <= 200) {
-    return "bg-red-700";
+    return "unhealthy";
   } else if (aqi <= 300) {
-    return "bg-indigo-700";
+    return "veryUnhealthy";
   } else if (aqi > 300) {
-    return "bg-rose-950";
-  }
-}
-
-function getAqiCategory(aqi) {
-  if (aqi <= 50) {
-    return "Good";
-  } else if (aqi <= 100) {
-    return "Moderate";
-  } else if (aqi <= 150) {
-    return "Unhealthy for sensitive groups";
-  } else if (aqi <= 200) {
-    return "Unhealthy";
-  } else if (aqi <= 300) {
-    return "Very unhealthy";
-  } else if (aqi > 300) {
-    return "Hazardous";
+    return "hazardous";
   }
 }

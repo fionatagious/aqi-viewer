@@ -1,4 +1,4 @@
-# Air Quality (AQI) Index Viewer
+# Air Quality Index (AQI) Viewer
 
 This repository is the codebase for an Air Quality Index (AQI) Viewer, which displays air quality data, collected and measured at monitoring stations around the world. To build the viewer, I used a free and publicly accessible [Real-time Air Quality Data Feed](https://aqicn.org/json-api/doc/), a JSON API provided by the World Air Quality Index project.
 

@@ -1,4 +1,8 @@
 {
+  "name": "air-quality-index-display",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://fionatagious.github.io/aqi-display",
   "scripts": {
     "dev": "next dev"
   },
